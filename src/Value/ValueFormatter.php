@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Vilnis\EnvEditor\Value;
+namespace VilnisGr\EnvEditor\Value;
 
 class ValueFormatter
 {

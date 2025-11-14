@@ -1,13 +1,12 @@
 <?php
-
 declare(strict_types=1);
 
-namespace Vilnis\EnvEditor\Writer;
+namespace VilnisGr\EnvEditor\Writer;
 
-use Vilnis\EnvEditor\Contracts\WriterInterface;
-use Vilnis\EnvEditor\Exceptions\DotenvException;
-use Vilnis\EnvEditor\Parser\DotenvParser;
-use Vilnis\EnvEditor\Value\ValueFormatter;
+use VilnisGr\EnvEditor\Contracts\WriterInterface;
+use VilnisGr\EnvEditor\Exceptions\DotenvException;
+use VilnisGr\EnvEditor\Parser\DotenvParser;
+use VilnisGr\EnvEditor\Value\ValueFormatter;
 
 class DotenvWriter implements WriterInterface
 {

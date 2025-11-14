@@ -1,10 +1,9 @@
 <?php
-
 declare(strict_types=1);
 
-namespace Vilnis\EnvEditor\Loader;
+namespace VilnisGr\EnvEditor\Loader;
 
-use Vilnis\EnvEditor\Exceptions\DotenvException;
+use VilnisGr\EnvEditor\Exceptions\DotenvException;
 
 class EnvLoader
 {

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Vilnis\EnvEditor\Parser;
+namespace VilnisGr\EnvEditor\Parser;
 
 class DotenvParser
 {

@@ -1,8 +1,7 @@
 <?php
-
 declare(strict_types=1);
 
-namespace Vilnis\EnvEditor\Contracts;
+namespace VilnisGr\EnvEditor\Contracts;
 
 interface WriterInterface
 {
