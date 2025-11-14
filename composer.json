@@ -2,6 +2,7 @@
     "name": "vilnisgr/env-editor",
     "description": "Modern PHP 8.3 library for programmatically editing dotenv files. Preserve comments, formatting, and variable order while reading or writing .env files.",
     "type": "library",
+    "license": "MIT",
 
     "require": {
         "php": ">=8.3"
