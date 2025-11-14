@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vilnis\EnvEditor\Tests\Writer;
+namespace VilnisGr\EnvEditor\Tests\Writer;
 
 use PHPUnit\Framework\TestCase;
-use Vilnis\EnvEditor\Writer\DotenvWriter;
+use VilnisGr\EnvEditor\Writer\DotenvWriter;
 
 class DotenvWriterTest extends TestCase
 {
