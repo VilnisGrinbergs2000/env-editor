@@ -38,7 +38,7 @@ composer require vilnisgr/env-editor
 Basic Usage
 ------------------------------------------------------------
 Load a .env file:
-```
+```php
 use VilnisGr\EnvEditor\Writer\DotenvWriter;
 
 $writer = new DotenvWriter();
@@ -50,28 +50,28 @@ Editing Variables
 ------------------------------------------------------------
 
 --- Set or update a value:
-```
+```php
 $writer->set('APP_ENV', 'production');
 $writer->save();
 ```
 --- Insert AFTER another key:
-```
+```php
 $writer->set('DB_PASS', 'secret', ['after' => 'DB_USER'], spacing: 1);
 ```
 --- Insert BEFORE another key:
-```
+```php
 $writer->set('NEW_BEFORE', 'ok', ['before' => 'CACHE_DRIVER']);
 ```
 --- Insert at TOP:
-```
+```php
 $writer->set('FIRST_ENTRY', 'start', position: 'top');
 ```
 --- Insert at BOTTOM:
-```
+```php
 $writer->set('LAST_ENTRY', 'end', position: 'bottom');
 ```
 --- Remove a variable:
-```
+```php
 $writer->remove('APP_DEBUG');
 $writer->save();
 ```
@@ -81,18 +81,18 @@ Exporting & Importing
 ------------------------------------------------------------
 
 --- Export to array:
-```
+```php
 $arr = $writer->toArray();
 ```
 --- Import values from an array:
-```
+```php
 $writer->import([
     'APP_ENV' => 'local',
     'LOG_CHANNEL' => 'stack'
 ]);
 ```
 --- Update using export + import (real-world usage):
-```
+```php
 $config = $writer->toArray();
 $config['APP_ENV'] = 'testing';
 $writer->import($config)->save();
@@ -102,14 +102,14 @@ $writer->import($config)->save();
 Key Checking
 ------------------------------------------------------------
 Check if key exists:
-```
+```php
 $writer->has('APP_NAME'); // true or false
 ```
 
 ------------------------------------------------------------
 Missing Keys Detection
 ------------------------------------------------------------
-```
+```php
 $missing = $writer->missingKeys([
     'APP_NAME',
     'APP_ENV',
@@ -123,7 +123,7 @@ print_r($missing);
 ------------------------------------------------------------
 Backup & Restore
 ------------------------------------------------------------
-```
+```php
 $writer->backup('.env.bak');
 
 $writer->set('BROKEN', 'xxx');
@@ -136,7 +136,7 @@ $writer->restore('.env.bak');
 ------------------------------------------------------------
 Diff Environment Files
 ------------------------------------------------------------
-```
+```php
 $diff = $writer->diff('.env.example');
 print_r($diff);
 ```
@@ -155,11 +155,11 @@ Merge Environment Files
 ------------------------------------------------------------
 
 --- Merge without overwriting:
-```
+```php
 $writer->merge('.env.example', overrideExisting: false);
 ```
 --- Merge WITH overwriting:
-```
+```php
 $writer->merge('.env.example', overrideExisting: true);
 ```
 
@@ -167,7 +167,7 @@ $writer->merge('.env.example', overrideExisting: true);
 Preview (Dry Run)
 ------------------------------------------------------------
 Preview changes without writing to disk:
-```
+```php
 echo $writer->preview();
 ```
 
@@ -175,21 +175,21 @@ echo $writer->preview();
 Environment Loader
 ------------------------------------------------------------
 Load .env variables into PHP runtime:
-```
+```php
 use VilnisGr\EnvEditor\Loader\EnvLoader;
 
 $loader = new EnvLoader(__DIR__ . '/.env');
 ```
 --- Load without overriding existing variables:
-```
+```php
 $loader->load();
 ```
 --- Load WITH overriding:
-```
+```php
 $loader->load(true);
 ```
 Access values:
-```
+```php
 getenv('APP_NAME');
 $_ENV['APP_ENV'];
 ```
@@ -197,7 +197,7 @@ $_ENV['APP_ENV'];
 ------------------------------------------------------------
 Testing
 ------------------------------------------------------------
-```
+```php
 vendor/bin/phpunit
 ```
 
