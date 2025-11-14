@@ -1,0 +1,32 @@
+{
+    "name": "vilnis/env-editor",
+    "description": "Modern PHP 8.3 library for programmatically editing dotenv files. Preserve comments, formatting, and variable order while reading or writing .env files.",
+    "type": "library",
+
+    "require": {
+        "php": ">=8.3"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Vilnis\\EnvEditor\\": "src/"
+        }
+    },
+
+    "autoload-dev": {
+        "psr-4": {
+            "Vilnis\\EnvEditor\\Tests\\": "tests/"
+        }
+    },
+
+    "authors": [
+        {
+            "name": "vilnisgrinbergs",
+            "email": "vilnisgrinbergs22@proton.me"
+        }
+    ],
+
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
+    }
+}
