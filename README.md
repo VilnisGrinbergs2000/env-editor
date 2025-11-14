@@ -26,7 +26,7 @@ Requires PHP 8.3 or newer.
 Installation
 ------------------------------------------------------------
 ```
-composer require vilnis/env-editor
+composer require vilnisGr/env-editor
 ```
 ------------------------------------------------------------
 Basic Usage
