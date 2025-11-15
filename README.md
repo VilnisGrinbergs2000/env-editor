@@ -19,7 +19,6 @@ This documentation covers every part of the library in depth:
 🔹 **Schema Validator** (required/optional keys, casting, rules, grouping)  
 🔹 **Rules Engine** (min/max/regex/length/in/custom)  
 🔹 **Config Factory (DTO Generator)** for type-safe config objects  
-🔹 **Laravel Integration Guide**  
 🔹 **Vanilla PHP Integration Guide**  
 🔹 **Full examples for every method**
 
