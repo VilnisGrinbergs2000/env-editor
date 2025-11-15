@@ -1,23 +1,30 @@
 <?php
+
 declare(strict_types=1);
 
 namespace VilnisGr\EnvEditor\Loader;
 
 use VilnisGr\EnvEditor\Exceptions\DotenvException;
+use VilnisGr\EnvEditor\Parser\DotenvParser;
 
 class EnvLoader
 {
     private string $path;
+    private DotenvParser $parser;
 
-    public function __construct(string $path)
+    public function __construct(string $path, ?DotenvParser $parser = null)
     {
         if (!is_file($path)) {
             throw new DotenvException("Env file not found: $path");
         }
 
         $this->path = $path;
+        $this->parser = $parser ?? new DotenvParser();
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function load(bool $overrideExisting = false): array
     {
         $content = file_get_contents($this->path);
@@ -25,79 +32,40 @@ class EnvLoader
             throw new DotenvException("Unable to read env file: $this->path");
         }
 
-        $lines = explode("\n", $content);
+        $parsed = $this->parser->parse($content);
         $loaded = [];
 
-        foreach ($lines as $line) {
-            $trimmed = trim($line);
-
-            if ($trimmed === '' || str_starts_with($trimmed, '#')) {
+        foreach ($parsed as $line) {
+            if ($line['type'] !== 'entry') {
                 continue;
             }
 
-            if (!str_contains($trimmed, '=')) {
-                continue;
-            }
+            $key = $line['key'];
+            $value = $line['value'];
 
-            [$key, $value] = explode('=', $trimmed, 2);
-            $key = trim($key);
-            $value = trim($value);
-
-            if ($key === '') {
-                continue;
-            }
-
-            $value = $this->stripQuotes($value);
-            $value = $this->expandVariables($value);
-
-            if (!$overrideExisting && getenv($key) !== false) {
+            if (!$overrideExisting && $this->envExists($key)) {
                 continue;
             }
 
             $this->setEnv($key, $value);
-
             $loaded[$key] = $value;
         }
 
         return $loaded;
     }
 
-    private function stripQuotes(string $value): string
+    private function envExists(string $key): bool
     {
-        $length = strlen($value);
-
-        if ($length >= 2) {
-            $first = $value[0];
-            $last = $value[$length - 1];
-
-            if (($first === '"' && $last === '"') || ($first === "'" && $last === "'")) {
-                $value = substr($value, 1, $length - 2);
-            }
-        }
-
-        return $value;
-    }
-
-    private function expandVariables(string $value): string
-    {
-        return preg_replace_callback('/\$\{([A-Z0-9_]+)}/i', static function (array $matches): string {
-            $var = $matches[1];
-            $env = getenv($var);
-            if ($env === false) {
-                return $matches[0];
-            }
-
-            return $env;
-        }, $value) ?? $value;
+        return array_key_exists($key, $_ENV)
+            || array_key_exists($key, $_SERVER)
+            || getenv($key) !== false;
     }
 
     private function setEnv(string $key, string $value): void
     {
-        putenv("{$key}={$value}");
-        $_ENV[$key] = $value;
+        putenv("$key=$value");
 
-        if (!array_key_exists($key, $_SERVER)) {
-            $_SERVER[$key] = $value;
-        }
+        $_ENV[$key] = $value;
+        $_SERVER[$key] = $value;
     }
 }

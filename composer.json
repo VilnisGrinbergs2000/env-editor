@@ -3,10 +3,10 @@
     "description": "Modern PHP 8.3 library for programmatically editing dotenv files. Preserve comments, formatting, and variable order while reading or writing .env files.",
     "type": "library",
     "license": "MIT",
-    "keywords": ["dotenv", "env", "editor", "config", "php", "environment", "environment-variables"],
-
+    "keywords": ["env", "dotenv", "schema", "validation", "dto", "config", "fluent"],
     "require": {
-        "php": ">=8.3"
+        "php": ">=8.3",
+        "ext-ctype": "*"
     },
 
     "autoload": {
